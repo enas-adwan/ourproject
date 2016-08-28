@@ -160,9 +160,9 @@ public class SignUp extends AppCompatActivity {
         Pattern pattern = Pattern.compile(password);
         Matcher matcher = pattern.matcher(pass);
         return matcher.matches();
-   
+
     }
-    private void register(String name, String password, String secret, final String valid_flag) {
+    private void register(String num, String password, String secret, final String valid_flag) {
        /* String urlSuffix = "?name=" + name + "&password=" + password;*/
 
 
@@ -194,7 +194,7 @@ public class SignUp extends AppCompatActivity {
                 i.setData(Uri.parse(REGISTER_URL+s));
                 startActivity(i);*/
                 HashMap<String, String> data = new HashMap<String,String>();
-                data.put("name",params[0]);
+                data.put("number",params[0]);
 
                 data.put("password",params[1]);
                 data.put("secret",params[2]);
@@ -222,7 +222,7 @@ public class SignUp extends AppCompatActivity {
         }
 
         RegisterUser ru = new RegisterUser();
-        ru.execute(name,password,secret);
+        ru.execute(num,password,secret);
 
        /* ru.execute(urlSuffix);*/
     }}
