@@ -5,15 +5,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
 /**
  * Created by hp on 28/08/2016.
  */;
 public class LogIn extends AppCompatActivity  {
+    EditText UsernameEt, PasswordEt;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UsernameEt = (EditText)findViewById(R.id.etUserName);
+        PasswordEt = (EditText)findViewById(R.id.etPassword);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -26,5 +31,12 @@ public class LogIn extends AppCompatActivity  {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+    public void OnLogin(View view) {
+        String number = UsernameEt.getText().toString();
+        String password = PasswordEt.getText().toString();
+        String type = "login";
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute(type, number, password);
     }
 }
