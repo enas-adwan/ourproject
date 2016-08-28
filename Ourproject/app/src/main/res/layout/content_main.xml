@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Login"
-                    android:id="@+id/button2"
+                    android:id="@+id/login"
                     android:textColor="#faf8f8"
                     android:background="#ed5cc3ad" />
 

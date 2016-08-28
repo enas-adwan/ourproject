@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button signup;
+    private Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Intent i=new Intent(MainActivity.this,SignUp.class);
+
+                startActivity(i);
+
+             /*   new SignUpActivity(this,status,role,0).execute(username,password);*/
+
+
+            }
+        });
+       login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent i=new Intent(MainActivity.this,LogIn.class);
 
                 startActivity(i);
 
