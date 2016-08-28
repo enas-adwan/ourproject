@@ -19,6 +19,8 @@ public class SignUp extends AppCompatActivity {
     private EditText Num;
     private EditText Password;
     private Button BUtton;
+    private EditText ConfirmPassword;
+
     String valid_flag=null;
     private static final String REGISTER_URL = "http://192.168.1.7/register.php";
 
@@ -33,7 +35,7 @@ public class SignUp extends AppCompatActivity {
         Num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View arg0, boolean arg1) {
-                String num = Num.getText().toString().trim().toLowerCase();
+                String num = Num.getText().toString().trim();
                 Num.setError(null);
                 valid_flag=null;
                 if (!isValidEmail(num)) {
@@ -51,11 +53,24 @@ public class SignUp extends AppCompatActivity {
         Password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View arg0, boolean arg1) {
-                String password = Password.getText().toString().trim().toLowerCase();
-                Password.setError(null);
+                String password = Password.getText().toString().trim();
                 valid_flag=null;
                 if (!isValidPassword(password)) {
                     Password.setError("Invalid password");
+                    valid_flag="err";
+                }else{
+                    valid_flag=null;
+                }
+            }
+        });
+        ConfirmPassword = (EditText) findViewById(R.id.confirmpassword);
+        ConfirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View arg0, boolean arg1) {
+                String confirmpassword = ConfirmPassword.getText().toString().trim();
+                valid_flag=null;
+                if (!isValidConfirmPassword(confirmpassword)) {
+                    ConfirmPassword.setError("Invalid password");
                     valid_flag="err";
                 }else{
                     valid_flag=null;
@@ -79,8 +94,9 @@ public class SignUp extends AppCompatActivity {
 
     private void registerUser(String valid_flag) {
 
-        String num = Num.getText().toString().trim().toLowerCase();
-        String password = Password.getText().toString().trim().toLowerCase();
+        String num = Num.getText().toString().trim();
+        String password = Password.getText().toString().trim();
+        String confirmpassword = ConfirmPassword.getText().toString().trim();
         if (!isValidEmail(num)) {
             Num.setError("Wrong ID Number");
             valid_flag="err";
@@ -100,6 +116,16 @@ public class SignUp extends AppCompatActivity {
             Password.setError(null);
             valid_flag=null;
         }
+
+        if (!isValidConfirmPassword(confirmpassword)) {
+            ConfirmPassword.setError("Invalid password");
+            valid_flag="err";
+        }else{
+            valid_flag=null;
+        }
+
+
+
         if(valid_flag==null){
 
 
@@ -128,6 +154,13 @@ public class SignUp extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    private boolean isValidConfirmPassword(String pass) {
+        String password = Password.getText().toString().trim();
+        Pattern pattern = Pattern.compile(password);
+        Matcher matcher = pattern.matcher(pass);
+        return matcher.matches();
+   
     }
     private void register(String name, String password, String secret, final String valid_flag) {
        /* String urlSuffix = "?name=" + name + "&password=" + password;*/
