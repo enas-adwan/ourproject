@@ -25,6 +25,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private Button signup;
     private Button login;
+    private Button add_calory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,21 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Intent i=new Intent(MainActivity.this,LogIn.class);
+
+                startActivity(i);
+
+             /*   new SignUpActivity(this,status,role,0).execute(username,password);*/
+
+
+            }
+        });
+        add_calory = (Button) findViewById(R.id.addcalory);
+        add_calory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent i=new Intent(MainActivity.this,AddCalory.class);
 
                 startActivity(i);
 
