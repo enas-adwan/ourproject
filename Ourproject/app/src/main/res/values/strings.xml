@@ -8,6 +8,12 @@
     <string name="save">Save </string>
     <string name="Add_New">Add New</string>
     <string name="view_data">show </string>
-
+    <string name="country_prompt">Choose quantity</string>
+    <string-array name="country_arrays">
+        <item>Spoon</item>
+        <item>Cup</item>
+        <item>1/2 Cup</item>
+        <item>3/4 Cup</item>
+    </string-array>
 
 </resources>
