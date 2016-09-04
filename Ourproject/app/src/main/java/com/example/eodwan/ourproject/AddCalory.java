@@ -1,6 +1,7 @@
 package com.example.eodwan.ourproject;
 
         import android.content.Intent;
+        import android.database.Cursor;
         import android.support.v7.app.AppCompatActivity;
         import android.app.Activity;
         import android.content.Context;
@@ -8,6 +9,8 @@ package com.example.eodwan.ourproject;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.EditText;
+        import android.widget.ListView;
+        import android.widget.TextView;
         import android.widget.Toast;
 /**
  * Created by hp on 03/09/2016.
@@ -15,10 +18,13 @@ package com.example.eodwan.ourproject;
 public class AddCalory extends AppCompatActivity  {
         EditText calory_num;
         Context context=this;
-        recipeDbHelper userDbHelper;
+        ListView listView;
         SQLiteDatabase sqLiteDatabase;
-
-
+        recipeDbHelper userDbHelper;
+        recipeDbHelper userDbHelper2;
+        Cursor cursor;
+        ListDataAdpter listDataAdpter;
+        TextView calorySum;
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.calory);
@@ -34,12 +40,30 @@ public class AddCalory extends AppCompatActivity  {
                 userDbHelper.addinnformation(num,sqLiteDatabase);
                 Toast.makeText(getBaseContext(),"Data saved",Toast.LENGTH_LONG).show();
                 userDbHelper.close();
+                listView=(ListView)findViewById(R.id.list_view);
+                calorySum=(TextView)findViewById(R.id.calory_sum);
+                listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
+                listView.setAdapter(listDataAdpter);
+                userDbHelper2=new recipeDbHelper(getApplicationContext());
+                sqLiteDatabase=userDbHelper2.getReadableDatabase();
+                cursor=userDbHelper2.getinformation(sqLiteDatabase);
+
+                if(cursor.moveToFirst())
+                {
+                        do {
+                                Float sum=0.0f;
+                                Float calory;
+                                calory=cursor.getFloat(0);
+                                sum=userDbHelper2.getTotal(sqLiteDatabase);
+                                calorySum.setText(String.valueOf(sum));
+                                DataProvider dataProvider=new DataProvider(calory);
+                                listDataAdpter.add(dataProvider);
+
+                        }while (cursor.moveToNext());
+                }
+
         }
 
 
-        public void showData(View view)
-        {
-                Intent i = new Intent(AddCalory.this,DataListActivity.class);
-                startActivity(i);
-        }
+
 }
