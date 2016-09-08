@@ -1,0 +1,15 @@
+<resources>
+    <string name="hello">Hello World, UsingSQLite!</string>
+    <string name="app_name">Addrecipe</string>
+    <string name="search_hint">Inter</string>
+    <string name="action_settings">Settings</string>
+    <string name="COUNTRY_LABEL">Country</string>
+    <string name="title_activity_name_suggestion_provider">NameSuggestionProvider</string>
+    <string name="country_prompt">Choose quantity</string>
+    <string-array name="country_arrays">
+        <item>Spoon</item>
+        <item>Cup</item>
+        <item>1/2 Cup</item>
+        <item>3/4 Cup</item>
+    </string-array>
+</resources>
