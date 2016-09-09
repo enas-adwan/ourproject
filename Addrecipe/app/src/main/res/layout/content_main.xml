@@ -25,6 +25,37 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Recipe Name"
+                android:id="@+id/textView3" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/t" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Ingredient:"
+                android:id="@+id/textView4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:weightSum="1">
 
             <Spinner
@@ -32,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner1"
                 android:layout_weight=".06"
-                android:layout_marginTop="40dp"
                 android:entries="@array/country_arrays" />
 
             <AutoCompleteTextView
@@ -40,7 +70,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="40dp"
                 android:ems="10"
                 android:completionThreshold="1"
                 android:text=""
@@ -56,8 +85,7 @@
                 android:text="Add"
                 android:id="@+id/getall"
                 android:layout_alignTop="@+id/auto"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="40dp" />
+                android:layout_alignParentEnd="true" />
 
         </LinearLayout>
 
@@ -91,7 +119,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:weightSum="1"
             android:layout_marginTop="10dp">
 
@@ -113,6 +141,83 @@
                 android:layout_width="wrap_content"
                 android:layout_height="131dp"
                 android:id="@+id/list_view" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="prep time"
+                android:id="@+id/textView5" />
+
+            <EditText
+                android:layout_width="61dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/prep" />
+
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="wrap_content"
+                android:text="cooking time"
+                android:id="@+id/textView6" />
+
+            <EditText
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/cook" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="total time"
+                android:id="@+id/textView7" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/total" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Directions"
+                android:id="@+id/textView8" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:id="@+id/desc" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Recipe"
+                android:id="@+id/add" />
         </LinearLayout>
 
     </LinearLayout>

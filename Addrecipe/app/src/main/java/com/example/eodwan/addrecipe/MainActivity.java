@@ -7,7 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.widget.ArrayAdapter;
 import android.support.v7.app.AppCompatActivity;
-
+import java.util.Arrays;
 import java.util.List;
 
 import android.provider.BaseColumns;
@@ -35,7 +35,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ListView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Spinner;
@@ -119,13 +119,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     // adapter for auto-complete
-
+   public String[] myDataa;
     private TextView Text;
-
+    private EditText Title;
+    public ListView listVieww;
+    private String[] stringArray;
+    private EditText Prep;
+    private EditText Cook;
+    private EditText Total;
+    private EditText Desc;
     private String url1 = "http://api.nal.usda.gov/ndb/reports/?ndbno=";
     private String url2 = "&type=f&format=json&api_key=lhfJq898Ab0nNzZR9XTN3kviNgMMKEAb92Q8Dfcr";
+    private static final String RECIPE_URL = "http://10.0.2.2/addrecipe.php";
     protected DatabaseHelper db;
     protected DatabaseHelper database;
+    SQLiteDatabase sqLiteDatabase;
+    recipeDbHelper userDbHelper3;
+    String list;
 
     public AutoCompleteTextView autoCom;
     private Button BUtton;
@@ -142,9 +152,15 @@ public class MainActivity extends AppCompatActivity {
 
         Text = (TextView) findViewById(R.id.text);
 
+        Title = (EditText) findViewById(R.id.t);
+        Prep= (EditText) findViewById(R.id.prep);
+        Total= (EditText) findViewById(R.id.total);
+        Cook= (EditText) findViewById(R.id.cook);
+        BUtton=(Button) findViewById(R.id.add);
+        Desc=  (EditText) findViewById(R.id.desc);
+        listVieww=(ListView)findViewById(R.id.list_view);
         db = new DatabaseHelper(this);
         db.getWritableDatabase();
-
 
         if (!db.isTableExists("food")) {
             jso();
@@ -206,9 +222,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+     BUtton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String secret="3CH6knCsenas2va8GrHk4mf3JqmUctCM";
+                String title = Title.getText().toString().trim();
+               String food = Text.getText().toString().trim();
+                String desc = Desc.getText().toString().trim();
+                String total = Total.getText().toString().trim();
+                String prep = Prep.getText().toString().trim();
+                String cook = Cook.getText().toString().trim();
 
-    }
 
+                //  String food = autoCom.getText().toString().trim();
+               //String[] stringArray = new String[listVieww.getCount()];
+                userDbHelper3=new  recipeDbHelper(getApplicationContext());
+                sqLiteDatabase=userDbHelper3.getWritableDatabase();
+
+              myDataa = userDbHelper3.SelectAll();
+               list =( Arrays.toString(myDataa));
+                list =  list.replaceAll(",", "|");
+
+                Addrecipe( title ,  food, secret,desc,list,total,prep,cook);
+
+            }
+        });
+
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -316,19 +356,19 @@ public class MainActivity extends AppCompatActivity {
                             value3= value3*.85f;
                           stringFloat3= Float.toString(value3);
                             food = autoCom.getText().toString().trim();
-                            userDbHelper.addinnformation(value,food,sqLiteDatabase);
-
-                            listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
-                            listView.setAdapter(listDataAdpter);
-                            userDbHelper2=new recipeDbHelper(getApplicationContext());
-                            sqLiteDatabase=userDbHelper2.getReadableDatabase();
-                            cursor=userDbHelper2.getinformation(sqLiteDatabase);
 
 
                        switch(quintity){
 
                             case "Spoon":
                               //  Text.setText(stringFloat);
+                                userDbHelper.addinnformation(value,food,sqLiteDatabase);
+
+                                listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
+                                listView.setAdapter(listDataAdpter);
+                                userDbHelper2=new recipeDbHelper(getApplicationContext());
+                                sqLiteDatabase=userDbHelper2.getReadableDatabase();
+                                cursor=userDbHelper2.getinformation(sqLiteDatabase);
 
 
                                 if(cursor.moveToFirst())
@@ -346,18 +386,82 @@ public class MainActivity extends AppCompatActivity {
                                 }
                               //  userDbHelper2.close();
                                 break;
-                            case "Cup":
 
-                                Text.setText(stringFloat1);
+                            case "Cup":
+                                userDbHelper.addinnformation(value1,food,sqLiteDatabase);
+
+                                listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
+                                listView.setAdapter(listDataAdpter);
+                                userDbHelper2=new recipeDbHelper(getApplicationContext());
+                                sqLiteDatabase=userDbHelper2.getReadableDatabase();
+                                cursor=userDbHelper2.getinformation(sqLiteDatabase);
+
+
+                                if(cursor.moveToFirst())
+                                {
+                                    do {
+
+                                        calory=cursor.getString(0);
+                                        sum=userDbHelper2.getTotal(sqLiteDatabase);
+                                        Text.setText(String.valueOf(sum));
+                                        DataProvider dataProvider=new DataProvider(calory);
+                                        listDataAdpter.add(dataProvider);
+
+                                    }while (cursor.moveToNext());
+
+                                }
                                 break;
                             case "1/2 Cup":
 
-                                Text.setText(stringFloat2);
+                                userDbHelper.addinnformation(value2,food,sqLiteDatabase);
+
+                                listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
+                                listView.setAdapter(listDataAdpter);
+                                userDbHelper2=new recipeDbHelper(getApplicationContext());
+                                sqLiteDatabase=userDbHelper2.getReadableDatabase();
+                                cursor=userDbHelper2.getinformation(sqLiteDatabase);
+
+
+                                if(cursor.moveToFirst())
+                                {
+                                    do {
+
+                                        calory=cursor.getString(0);
+                                        sum=userDbHelper2.getTotal(sqLiteDatabase);
+                                        Text.setText(String.valueOf(sum));
+                                        DataProvider dataProvider=new DataProvider(calory);
+                                        listDataAdpter.add(dataProvider);
+
+                                    }while (cursor.moveToNext());
+
+                                }
                                 break;
                             case "3/4 Cup":
 
-                                Text.setText(stringFloat3);
+                                userDbHelper.addinnformation(value3,food,sqLiteDatabase);
+
+                                listDataAdpter=new ListDataAdpter(getApplicationContext(),R.layout.row_layout);
+                                listView.setAdapter(listDataAdpter);
+                                userDbHelper2=new recipeDbHelper(getApplicationContext());
+                                sqLiteDatabase=userDbHelper2.getReadableDatabase();
+                                cursor=userDbHelper2.getinformation(sqLiteDatabase);
+
+
+                                if(cursor.moveToFirst())
+                                {
+                                    do {
+
+                                        calory=cursor.getString(0);
+                                        sum=userDbHelper2.getTotal(sqLiteDatabase);
+                                        Text.setText(String.valueOf(sum));
+                                        DataProvider dataProvider=new DataProvider(calory);
+                                        listDataAdpter.add(dataProvider);
+
+                                    }while (cursor.moveToNext());
+
+                                }
                                 break;
+
 
                         }
 
@@ -585,7 +689,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG).show();
+
                     return "false";
                 }
 
@@ -597,6 +701,76 @@ public class MainActivity extends AppCompatActivity {
         ru.execute();
 
 
+    }
+    private void Addrecipe(String title , String calory, String secret, String desc, String list, String total, String prep, String cook) {
+       /* String urlSuffix = "?name=" + name + "&password=" + password;*/
+
+
+
+
+
+        class add extends AsyncTask<String, Void, String> {
+
+           addphprecipe ruc = new addphprecipe();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+              //  Toast.makeText(getApplicationContext(),s+valid_flag,Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+              /*  String s = params[0];
+              Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(REGISTER_URL+s));
+                startActivity(i);*/
+
+                HashMap<String, String> data = new HashMap<String,String>();
+                data.put("title",params[0]);
+
+                data.put("calory",params[1]);
+                data.put("secret",params[2]);
+                data.put("desc",params[3]);
+                data.put("list",params[4]);
+                data.put("total",params[5]);
+                data.put("prep",params[6]);
+                data.put("cook",params[7]);
+
+
+                String result = ruc.sendPostRequest(RECIPE_URL,data);
+
+                return  result;
+
+               /* BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(REGISTER_URL+s);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    String result;
+
+                    result = bufferedReader.readLine();
+
+                    return result;
+                }catch(Exception e){
+                    return "no";
+                }*/
+            }
+        }
+
+        add ru = new add();
+        ru.execute(title,calory,secret,desc,list,total,prep,cook);
+
+       /* ru.execute(urlSuffix);*/
     }
 
 }

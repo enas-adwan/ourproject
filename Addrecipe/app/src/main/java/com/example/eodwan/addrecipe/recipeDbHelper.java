@@ -66,4 +66,48 @@ public class recipeDbHelper extends SQLiteOpenHelper {
 
     }
 
+    public String[] SelectAll() {
+
+        // TODO Auto-generated method stub
+
+        try {
+            String arrData[] = null;
+            SQLiteDatabase db;
+            db = this.getReadableDatabase(); // Read Data
+
+
+
+            String strSQL = "SELECT name FROM project ";
+
+            strSQL +=  " ORDER BY _id DESC ";
+
+            Cursor cursor = db.rawQuery(strSQL, null);
+
+
+            if(cursor != null)
+            {
+                if (cursor.moveToFirst()) {
+                    arrData = new String[cursor.getCount()];
+                    /***
+                     *  [x] = Name
+                     */
+                    int i= 0;
+                    do {
+
+                        arrData[i] = cursor.getString(0);
+                        i++;
+                    } while (cursor.moveToNext());
+
+                }
+            }
+            cursor.close();
+
+            return arrData;
+
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
 }
