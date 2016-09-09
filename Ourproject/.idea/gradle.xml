@@ -5,6 +5,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -15,6 +16,8 @@
             <option value="$PROJECT_DIR$" />
           </set>
         </option>
+=======
+>>>>>>> f15c76ea8748e0859d83e932beefdc0d007e8785
       </GradleProjectSettings>
     </option>
   </component>

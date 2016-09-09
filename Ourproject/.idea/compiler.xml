@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+<<<<<<< HEAD
     <option name="BUILD_PROCESS_ADDITIONAL_VM_OPTIONS" value="-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8" />
+=======
+>>>>>>> f15c76ea8748e0859d83e932beefdc0d007e8785
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />

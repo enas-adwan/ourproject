@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectDictionaryState">
     <dictionary name="mac" />
   </component>
@@ -19,4 +20,7 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" />
+>>>>>>> f15c76ea8748e0859d83e932beefdc0d007e8785
 </project>
